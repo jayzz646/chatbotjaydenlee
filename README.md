@@ -69,3 +69,48 @@ pnpm dev
 ```
 
 Your app template should now be running on [localhost:3000](http://localhost:3000).
+
+## Deployment (recommended)
+
+1. Ensure all env vars are set (prefer Vercel project env):
+   - `POSTGRES_URL`
+   - `REDIS_URL`
+   - `NEXTAUTH_SECRET` or `AUTH_SECRET`
+   - `AI_GATEWAY_API_KEY`
+   - `BLOB_READ_WRITE_TOKEN`
+2. Run local env check:
+
+```bash
+pnpm check:env
+```
+
+3. Run migrations:
+
+```bash
+pnpm db:migrate
+```
+
+4. Build:
+
+```bash
+pnpm build
+```
+
+5. Deploy to Vercel:
+
+```bash
+pnpm deploy
+```
+
+6. For preview deployments (branch deploys):
+
+```bash
+pnpm deploy:preview
+```
+
+### Vercel notes
+
+- Ensure you are logged in: `npx vercel login`
+- Use `npx vercel --token $VERCEL_TOKEN --prod --yes` in CI with token
+- If `POSTGRES_URL` is invalid, database queries will throw and Fall back to `offline:database`.
+
